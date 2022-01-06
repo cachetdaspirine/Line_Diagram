@@ -7,7 +7,8 @@ import tqdm
 from Get_Best_Aggregate import *
 from Get_High_L_Matrix import *
 import sys
-sys.path.append('/home/hcleroy/Extra_Module_py')
+#sys.path.append('/home/hcleroy/Extra_Module_py')
+sys.path.append('/home/hleroy/Simulation/Extra_Module_py')
 import RandomParticleFunctions_v4 as RPF
 from Numeric_Hex_Energy import *
 
@@ -18,7 +19,8 @@ Lines = np.zeros(Nline,dtype=np.ndarray)
 # we also stor GammaMaxS, not sure I ll use it though...
 GammaMaxS = np.zeros(Nline,dtype=float)
 #Seeds = np.zeros(Nline,dtype=np.int64)
-Ell0s = np.zeros(Nline,dtype=float)
+#Ell0s = np.zeros(Nline,dtype=float)
+Ell0s = np.load('Ell0.npy')
 
 #parameter of get line diagram also usefull for the plot part
 #Number of points in the line
@@ -30,7 +32,8 @@ Nmax = 1000
 SimNum = int(sys.argv[1])
 
 
-SeedBag = np.load('SeedBag400.npy')
+#SeedBag = np.load('SeedBag400.npy')
+SeedBag = np.loadtxt('Seeds_With_Ell_Higher_5.dat',dtype=np.int64)
 Seeds = SeedBag[SimNum*Nline:(SimNum+1)*Nline]
 
 for n in tqdm.trange(Nline):
@@ -38,7 +41,7 @@ for n in tqdm.trange(Nline):
     #Seeds[n],Ell0s[n] = Get_High_L_Matrix(Forbiden_seeds=Forbiden_seeds,ellmin=3.5)
     #Forbiden_seeds.add(Seeds[n])
     Mc,rho0,eps1,eps2,seed = RPF.RandomParticle(Seeds[n])
-    Ell0s[n] = MeasureL(Mc,rho0)
+    #Ell0s[n] = MeasureL(Mc,rho0)
 
 
     # Make the corresponding matrix
