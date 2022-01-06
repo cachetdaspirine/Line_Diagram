@@ -3,7 +3,7 @@ from Get_High_L_Matrix import *
 import os
 
 nparticles = 10
-ellmin = 3
+ellmin = 5
 if not os.path.isfile('touch Seeds_With_Ell_Higher_'+str(ellmin)+'.dat'):
     os.system('touch Seeds_With_Ell_Higher_'+str(ellmin)+'.dat')
 file = open('Seeds_With_Ell_Higher_'+str(ellmin)+'.dat','ab')
