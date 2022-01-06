@@ -4,8 +4,8 @@ import numpy as np
 import sys
 import copy
 import os
-#sys.path.append('/home/hcleroy/Extra_Module_py')
-sys.path.append('/home/hleroy/Simulation/Extra_Module_py')
+sys.path.append('/home/hcleroy/Extra_Module_py')
+#sys.path.append('/home/hleroy/Simulation/Extra_Module_py')
 import RandomParticleFunctions_v4 as RPF
 import MeasurePoisson as MP
 import Shape as Sh
@@ -47,6 +47,9 @@ def DistanceFromEdge(Array):
         Index-=toremove
         ind+=1
     return Res
+def MeasureLFromSeed(seed):
+    Mc,rho0,eps1,eps2,seed = RPF.RandomParticle(seed=seed)
+    return MeasureL(Mc,rho0)
 def MeasureL(Mc,rho0):
     Array = Sh.Parallel(18,ParticleType='Hexagon')
     #Array = Sh.Fiber(10,50,ParticleType='Hexagon')
