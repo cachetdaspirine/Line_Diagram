@@ -9,5 +9,5 @@ cd /home/hleroy/Simulation/Line_Diagram/
 #cd $PBS_O_WORKDIR
 
 #on lance le calcul
-#python3 Loop_For_High_L.py
-python3 Loop.py $1
+python3 Loop_For_High_L.py
+#python3 Loop.py $1
