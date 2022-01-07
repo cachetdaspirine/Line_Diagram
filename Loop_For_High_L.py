@@ -2,7 +2,7 @@ import numpy as np
 from Get_High_L_Matrix import *
 import os
 
-nparticles = 10
+nparticles = 20
 ellmin = 5
 if not os.path.isfile('touch Seeds_With_Ell_Higher_'+str(ellmin)+'.dat'):
     os.system('touch Seeds_With_Ell_Higher_'+str(ellmin)+'.dat')
