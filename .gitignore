@@ -1,5 +1,8 @@
 *.npy
 __pycache__/
 ell*/
-.ipynb*/
+.ipynb_checkpoints/.ipynb
 *.dat
+*.ipynb
+*.pdf
+*.data
