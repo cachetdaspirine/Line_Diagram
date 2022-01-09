@@ -4,14 +4,14 @@ import os
 
 nparticles = 20
 ellmin = 5
-if not os.path.isfile('touch Seeds_With_Ell_Higher_'+str(ellmin)+'.dat'):
-    os.system('touch Seeds_With_Ell_Higher_'+str(ellmin)+'.dat')
-file = open('Seeds_With_Ell_Higher_'+str(ellmin)+'.dat','ab')
+#if not os.path.isfile('touch Seeds_With_Ell_Higher_'+str(ellmin)+'_bis.dat'):
+#    os.system('touch Seeds_With_Ell_Higher_'+str(ellmin)+'_bis.dat')
+file = open('Seeds_With_Ell_Higher_'+str(ellmin)+'_bis.dat','ab')
 
 for i in range(nparticles):
     #SeedsFile = open('Seeds_With_Ell_Higher_'+str(ellmin)+'.dat','r')
     #Forbiden_seeds = {np.int64(f) for f in np.array(SeedsFile.read().split("\n"))[:-1]}
-    Forbiden_seeds = set(np.loadtxt('Seeds_With_Ell_Higher_'+str(ellmin)+'.dat',dtype=np.int64))
+    Forbiden_seeds = set(np.loadtxt('Seeds_With_Ell_Higher_'+str(ellmin)+'_bis.dat',dtype=np.int64))
     seed,ell0 = Get_High_L_Matrix(Forbiden_seeds = Forbiden_seeds,ellmin=ellmin)
 
     np.savetxt(file,np.int64(np.array([seed])),fmt='%i')
