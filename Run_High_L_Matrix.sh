@@ -15,6 +15,6 @@ mkdir $FileName
 
 for SimNum in $(seq 0 $SimMax)
 do
-	sbatch Submit.pbs $SimNum $SimMax $FileName
+	sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName
 	#bash Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName
 done
