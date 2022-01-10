@@ -6,4 +6,4 @@ ell*/
 *.data
 *.npy
 *.out
-Res/
+Res*/
