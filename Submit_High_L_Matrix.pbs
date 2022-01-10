@@ -5,8 +5,8 @@
 #PBS -m ae
 
 #On se place dans le repertoire de travail
-#cd /home/hleroy/Simulation/Line_Diagram/
-cd /home/hcleroy/Self_Fiber/Numerical_Computation/RandomParticle/Cluster/Line_Diagram
+cd /home/hleroy/Simulation/Line_Diagram/
+#cd /home/hcleroy/Self_Fiber/Numerical_Computation/RandomParticle/Cluster/Line_Diagram
 
 #cd $PBS_O_WORKDIR
 

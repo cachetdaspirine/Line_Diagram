@@ -9,8 +9,8 @@ sim_max = int(sys.argv[2])
 # name of the directory
 dir_name = sys.argv[3]
 
-nparticles = 10
-ellmin = 1
+nparticles = 20
+ellmin = 5
 
 for i in range(nparticles):
 
