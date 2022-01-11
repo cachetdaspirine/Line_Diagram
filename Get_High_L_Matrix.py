@@ -4,7 +4,7 @@ import numpy as np
 import sys
 import copy
 import os
-#sys.path.append('/home/hcleroy/Extra_Module_py')
+sys.path.append('/home/hcleroy/Extra_Module_py')
 sys.path.append('/home/hleroy/Simulation/Extra_Module_py')
 import RandomParticleFunctions_v4 as RPF
 import MeasurePoisson as MP

@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -V
+#PBS -q q-1jour
+#PBS -M h.leroy@epfl.ch
+#PBS -m ae
+
+#On se place dans le repertoire de travail
+cd /home/hleroy/Simulation/Line_Diagram/
+#cd /home/hcleroy/Self_Fiber/Numerical_Computation/RandomParticle/Cluster/Line_Diagram
+
+#cd $PBS_O_WORKDIR
+
+#on lance le calcul
+python3 loop_best_aggregate.py $1 $2
+#python3 Loop.py $1

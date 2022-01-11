@@ -7,20 +7,12 @@ import tqdm
 from Get_Best_Aggregate import *
 from Get_High_L_Matrix import *
 import sys
-#sys.path.append('/home/hcleroy/Extra_Module_py')
+sys.path.append('/home/hcleroy/Extra_Module_py')
 sys.path.append('/home/hleroy/Simulation/Extra_Module_py')
 import RandomParticleFunctions_v4 as RPF
 from Numeric_Hex_Energy import *
 
 
-Nline = 50
-Forbiden_seeds = set()
-Lines = np.zeros(Nline,dtype=np.ndarray)
-# we also stor GammaMaxS, not sure I ll use it though...
-GammaMaxS = np.zeros(Nline,dtype=float)
-#Seeds = np.zeros(Nline,dtype=np.int64)
-#Ell0s = np.zeros(Nline,dtype=float)
-Ell0s = np.load('Ell0.npy')
 
 #parameter of get line diagram also usefull for the plot part
 #Number of points in the line
@@ -30,13 +22,20 @@ Wmax = 10
 # hexagon max size
 Nmax = 1000
 SimNum = int(sys.argv[1])
+Folder = sys.argv[2]+'/'
 
 
 #SeedBag = np.load('SeedBag400.npy')
-SeedBag = np.loadtxt('Seeds_With_Ell_Higher_5.dat',dtype=np.int64)
-Seeds = SeedBag[SimNum*Nline:(SimNum+1)*Nline]
+Seeds = np.load(Folder+'Seeds_With_Ell_Higher_5_'+str(SimNum)+'.npy')
+Ell0s = np.zeros(Seeds.shape[0],dtype=int)
+Lines = np.zeros(Seeds.shape[0],dtype=np.ndarray)
+# we also stor GammaMaxs
+GammaMaxS = np.zeros(Seeds.shape[0],dtype=float)
+for n,s in enumerate(Seeds):
+    Ell0s[n] = MeasureLFromSeed(s)
+#Seeds = SeedBag[SimNum*Nline:(SimNum+1)*Nline]
 
-for n in tqdm.trange(Nline):
+for n in tqdm.trange(Seeds.shape[0]):
     # Generate a matrix with ell0 high enough : ell0>ellmin
     #Seeds[n],Ell0s[n] = Get_High_L_Matrix(Forbiden_seeds=Forbiden_seeds,ellmin=3.5)
     #Forbiden_seeds.add(Seeds[n])
@@ -100,6 +99,6 @@ for n in range(Nline):
     #ax[Lines.shape[0]-n-1].pcolormesh([GammaRange,GammaRange],NU,Fiber2Region,cmap=cm.Greens,vmin=1,vmax=WidthMax)
 ax[-1].set_xlabel(r'$\frac{\Gamma}{\Gamma_{max}}$',fontsize=30)
 ax[ax.__len__()//2].set_ylabel(r'$\nu$',fontsize=30)
-fig.savefig('RandomPhaseDiagram'+str(Number)+'.pdf',transparent=True,bbox_inches='tight')
+fig.savefig('RandomPhaseDiagram'+str(SimNum)+'.pdf',transparent=True,bbox_inches='tight')
 #fig.savefig('RandomPhaseDiagram_3.png',transparent=True,bbox_inches='tight')
 #plt.imshow([Lines[:,2][0],np.arange(0.,1.5,0.02)])
