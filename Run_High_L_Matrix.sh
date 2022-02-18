@@ -1,5 +1,5 @@
 #!/bin/bash
-SimMax=99
+SimMax=10
 
 
 # create a directory with a new number
@@ -15,6 +15,6 @@ mkdir $FileName
 
 for SimNum in $(seq 0 $SimMax)
 do
-	sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName
-	#bash Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName
+	#sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName
+	python3 Loop_For_High_L.py $1 $2 $3
 done
