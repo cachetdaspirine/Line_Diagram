@@ -26,7 +26,8 @@ Folder = sys.argv[2]+'/'
 
 
 #SeedBag = np.load('SeedBag400.npy')
-Seeds = np.load(Folder+'Seeds_With_Ell_Higher_5_'+str(SimNum)+'.npy')
+#Seeds = np.load(Folder+'Seeds_With_Ell_Higher_5_'+str(SimNum)+'.npy')
+Seeds = np.load(Folder+'Seeds_With_Ell_Higher_0_Smaller_3_'+str(SimNum)+'.npy')
 Ell0s = np.zeros(Seeds.shape[0],dtype=int)
 Lines = np.zeros(Seeds.shape[0],dtype=np.ndarray)
 # we also stor GammaMaxs
