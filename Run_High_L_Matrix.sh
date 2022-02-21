@@ -15,6 +15,6 @@ mkdir $FileName
 
 for SimNum in $(seq 0 $SimMax)
 do
-	#sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName
-	python3 Loop_For_High_L.py $1 $2 $3
+	sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName
+	#python3 Loop_For_High_L.py $SimNum $SimMax $FileName &
 done
