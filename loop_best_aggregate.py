@@ -71,10 +71,10 @@ Size = int(1./6.* (3+np.sqrt(3*(4*Nmax-1))))
 NList = np.array([Sh.Np(Sh.Parallel(r,'Hexagon')) for r in np.arange(1,Size+1,1)])
 SizeMax=NList[-1]
 
-np.save('Line'+str(SimNum),Lines,allow_pickle=True)
-np.save('Gamma'+str(SimNum),GammaMaxS,allow_pickle=True)
-np.save('Seed'+str(SimNum),Seeds,allow_pickle=True)
-np.save('Ell0'+str(SimNum),Ell0s,allow_pickle=True)
+np.save(Folder+'Line'+str(SimNum),Lines,allow_pickle=True)
+np.save(Folder+'Gamma'+str(SimNum),GammaMaxS,allow_pickle=True)
+np.save(Folder+'Seed'+str(SimNum),Seeds,allow_pickle=True)
+np.save(Folder+'Ell0'+str(SimNum),Ell0s,allow_pickle=True)
 
 GammaRange = np.linspace(0,1.,NpointsGamma)
 fig,ax = plt.subplots(ncols=1,nrows=Nline,figsize=(15, Lines.shape[0]))
