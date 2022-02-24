@@ -1,6 +1,6 @@
 import numpy as np
 import copy
-
+########################## ellmin5 to infinity####################
 Folder = 'ellmin5_Wmax10_Nmax100_dGamma100_first_batch/'
 Ell0s = np.load(Folder+'Ell00.npy',allow_pickle=True)
 Gammas = np.load(Folder+'Gamma0.npy',allow_pickle=True)
@@ -13,15 +13,25 @@ for i in range(1,20):
     Seeds = np.append(Seeds,np.load(Folder+'Seed'+str(i)+'.npy',allow_pickle=True))
 
 Folder = 'ellmin5_Wmax10_Nmax100_dGamma100_second_batch/'
-#Ell0s = np.load(Folder+'Ell00.npy',allow_pickle=True)
-#Gammas = np.load(Folder+'Gamma0.npy',allow_pickle=True)
-#Lines = np.load(Folder+'Line0.npy',allow_pickle=True)
-#Seeds = np.load(Folder+'Seed0.npy',allow_pickle=True)
 for i in range(0,100):
     Ell0s = np.append(Ell0s,np.load(Folder+'Ell0'+str(i)+'.npy',allow_pickle=True))
     Gammas = np.append(Gammas,np.load(Folder+'Gamma'+str(i)+'.npy',allow_pickle=True))
     Lines = np.append(Lines,np.load(Folder+'Line'+str(i)+'.npy',allow_pickle=True),axis=0)
     Seeds = np.append(Seeds,np.load(Folder+'Seed'+str(i)+'.npy',allow_pickle=True))
+
+
+########################## ellmin3 to ellmax5####################
+#Folder = 'ellmin3_ellmax5/'
+# Folder = 'ellmin0_ellmax3/'
+# Ell0s = np.load(Folder+'Ell00.npy',allow_pickle=True)
+# Gammas = np.load(Folder+'Gamma0.npy',allow_pickle=True)
+# Lines = np.load(Folder+'Line0.npy',allow_pickle=True)
+# Seeds = np.load(Folder+'Seed0.npy',allow_pickle=True)
+# for i in range(1,10):
+#     #Ell0s = np.append(Ell0s,np.load(Folder+'Ell0'+str(i)+'.npy',allow_pickle=True))
+#     Gammas = np.append(Gammas,np.load(Folder+'Gamma'+str(i)+'.npy',allow_pickle=True))
+#     Lines = np.append(Lines,np.load(Folder+'Line'+str(i)+'.npy',allow_pickle=True),axis=0)
+#     Seeds = np.append(Seeds,np.load(Folder+'Seed'+str(i)+'.npy',allow_pickle=True))
 
 for n,line in enumerate(Lines):
     Lines[n][np.where(line==919)] = 0

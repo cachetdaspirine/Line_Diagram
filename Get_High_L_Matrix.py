@@ -7,6 +7,7 @@ import os
 import matplotlib.pyplot as plt
 sys.path.append('/home/hcleroy/Extra_Module_py')
 sys.path.append('/home/hleroy/Simulation/Extra_Module_py')
+import FilamentsStructure_1_v2 as InfFiber
 import RandomParticleFunctions_v4 as RPF
 import MeasurePoisson as MP
 import Shape as Sh
@@ -56,16 +57,27 @@ def MeasureL(Mc,rho0,shape='hexagon'):
         return MeasureLHex(Mc,rho0)
     elif shape=='fiber':
         return MeasureLFiber(Mc,rho0)
+    elif shape=='strips':
+        return MeasureL_periodic_strips(Mc,rho0)
     else:
         print('shape argument have to be either hexagon or fiber')
         raise AttributeError
+def MeasureL_periodic_strips(Mc,rho0,width=20):
+    E = InfFiber.get_E_along_width(width,Mc,rho0)
+    return sum((max(E)-E)/(max(E)-min(E)))
 def MeasureLFiber(Mc,rho0,width=10):
     Sys = RSys.System(Mc,rho0,Sh.Fiber(5*width,width,'Hexagon'))
     EnergyData = Sys.get_sites_energy_as_array()
-    E = np.array([np.mean(EnergyData[10:-10,depth]) for depth in range(width//2-1)])
-    return E
-def MeasureLHex(Mc,rho0,check=False):
-    Array = Sh.Parallel(18,ParticleType='Hexagon')
+    if width%2 == 0:
+        E1 = np.array([np.mean(EnergyData[10:-10,depth]) for depth in range(width//2+1)])
+        E2 = np.array([np.mean(EnergyData[10:-10,depth]) for depth in range(width//2+1,width)])
+        return np.mean([E1,E2],axis=0)
+    else:
+        E1 = np.array([np.mean(EnergyData[10:-10,depth]) for depth in range(width//2)])
+        E2 = np.flip(np.array([np.mean(EnergyData[10:-10,depth]) for depth in range(width//2+1,width)]))
+        return np.append(np.mean([E1,E2],axis=0),np.mean(EnergyData[10:-10,width//2]))
+def MeasureLHex(Mc,rho0,check=False,size=18):
+    Array = Sh.Parallel(size,ParticleType='Hexagon')
     #Array = Sh.Fiber(10,50,ParticleType='Hexagon')
     S = RSys.System(Mc,rho0,Array)
     S.PrintPerSite(Name = Name,Extended=True)
