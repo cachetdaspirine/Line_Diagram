@@ -68,7 +68,7 @@ def MeasureL_periodic_strips2(Mc,rho0,width=20):
     return sum((max(E)-E)/(max(E)-min(E)))*0.5
 def MeasureL_periodic_strips(Mc,rho0,width=20):
     E = InfFiber.get_E_along_width(width,Mc,rho0)
-    return sum((max(E)-E)/(max(E)-min(E)))
+    return sum((max(E)-E)/(max(E)-min(E)))*0.5
 def MeasureLFiber(Mc,rho0,width=10):
     Sys = RSys.System(Mc,rho0,Sh.Fiber(5*width,width,'Hexagon'))
     EnergyData = Sys.get_sites_energy_as_array()
