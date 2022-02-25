@@ -15,5 +15,8 @@ Each of these simulation writes in its own file, but open all the other output
 files to keep a shared track of the seeds compute. This should avoid as much as
 possible overlapping seeds. while avoiding writting simultaneously in a file.
 
+
+New version just generate many seeds, with their associated characteristic ell0
+
 get_best_aggregate simulations :
 --------------------------------

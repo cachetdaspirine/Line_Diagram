@@ -16,19 +16,19 @@ import RandSyst as RSys
 
 Name = str(np.random.randint(1000000))
 
-def Get_High_L_Matrix(Forbiden_seeds = set(),ellmin = 2,ellmax=np.inf,count = False):
-    keep = True
-    counter = 0
-    while keep:
-        Mc,rho0,eps1,eps2,seed = RPF.RandomParticle()
-        if not seed in Forbiden_seeds:
-            ell0 = MeasureL(Mc,rho0)
-            if ell0 > ellmin and ell0<ellmax:
-                keep = False
-            counter +=1
-    if count:
-        print(counter)
-    return seed, ell0
+def Get_High_L_Matrix(seed):#ellmin = 2,ellmax=np.inf,count = False):
+    #keep = True
+    #counter = 0
+    #while keep:
+    Mc,rho0,eps1,eps2,seed = RPF.RandomParticle(seed=seed)
+        #if not seed in Forbiden_seeds:
+    ell0 = MeasureL(Mc,rho0)
+    #    if ell0 > ellmin and ell0<ellmax:
+    #        keep = False
+    #    counter +=1
+    #if count:
+    #    print(counter)
+    return ell0
 
 
 def DistanceFromEdge(Array):
@@ -68,7 +68,7 @@ def MeasureL_periodic_strips2(Mc,rho0,width=20):
     return sum((max(E)-E)/(max(E)-min(E)))*0.5
 def MeasureL_periodic_strips(Mc,rho0,width=20):
     E = InfFiber.get_E_along_width(width,Mc,rho0)
-    return sum((max(E)-E)/(max(E)-min(E)))*0.5
+    return sum((max(E)-E)/(max(E)-min(E)))*np.sqrt(3)/4.
 def MeasureLFiber(Mc,rho0,width=10):
     Sys = RSys.System(Mc,rho0,Sh.Fiber(5*width,width,'Hexagon'))
     EnergyData = Sys.get_sites_energy_as_array()
