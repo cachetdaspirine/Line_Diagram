@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 sys.path.append('/home/hcleroy/Extra_Module_py')
 sys.path.append('/home/hleroy/Simulation/Extra_Module_py')
 import FilamentsStructure_1_v2 as InfFiber
+import FilamentsStructure_2_v2 as InfFiber2
 import RandomParticleFunctions_v4 as RPF
 import MeasurePoisson as MP
 import Shape as Sh
@@ -62,6 +63,9 @@ def MeasureL(Mc,rho0,shape='hexagon'):
     else:
         print('shape argument have to be either hexagon or fiber')
         raise AttributeError
+def MeasureL_periodic_strips2(Mc,rho0,width=20):
+    E = InfFiber2.get_E_along_width_type_2(width,Mc,rho0)
+    return sum((max(E)-E)/(max(E)-min(E)))*0.5
 def MeasureL_periodic_strips(Mc,rho0,width=20):
     E = InfFiber.get_E_along_width(width,Mc,rho0)
     return sum((max(E)-E)/(max(E)-min(E)))
@@ -83,13 +87,17 @@ def MeasureLHex(Mc,rho0,check=False,size=18):
     S.PrintPerSite(Name = Name,Extended=True)
     EnergyData = np.loadtxt(Name)
     os.system('rm '+Name)
+    ######################################################
+    ######################################################
     Ranking = DistanceFromEdge(Array)
     Res = np.zeros((max(Ranking.values())+1,2),dtype=float)
     for ligne in EnergyData:
-        Res[Ranking[(int(ligne[-2]),int(ligne[-1]))],0] += ligne[-3]
-        Res[Ranking[(int(ligne[-2]),int(ligne[-1]))],1] += 1
+         Res[Ranking[(int(ligne[-2]),int(ligne[-1]))],0] += ligne[-3]
+         Res[Ranking[(int(ligne[-2]),int(ligne[-1]))],1] += 1
     #Res = Res[1:]
     Res[:,0] = Res[:,0]/Res[:,1]
+    ######################################################
+    ######################################################
     if check:
         plt.plot(np.arange(0,Res.shape[0],1),Res[:,0])
     return sum((max(Res[:,0])-Res[:,0])/(max(Res[:,0])-min(Res[:,0])))
