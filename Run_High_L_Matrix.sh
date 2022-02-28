@@ -23,7 +23,7 @@ do
 	SEED=$(< $SEEDFILE)
 	SEED=$(($SEED + $Nparticles))
 	echo $SEED > $SEEDFILE
-	#sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName
-	python3 Loop_For_High_L.py $SimNum $SimMax $FileName $SEED &
+	sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName $SEED
+	#python3 Loop_For_High_L.py $SimNum $SimMax $FileName $SEED &
 	echo $SimNum
 done
