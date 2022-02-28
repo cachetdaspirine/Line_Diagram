@@ -1,5 +1,5 @@
 #!/bin/bash
-SimMax=10
+SimMax=100
 SEEDFILE=last_max_seed.txt
 Nparticles=10000
 # create a directory with a new number
