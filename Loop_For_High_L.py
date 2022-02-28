@@ -3,7 +3,7 @@ from Get_High_L_Matrix import *
 import copy
 import os
 import sys
-import tqdm
+#import tqdm
 
 sim_num = int(sys.argv[1])
 sim_max = int(sys.argv[2])
@@ -27,7 +27,7 @@ nparticles = 10000
 #seed = last_seed + nparticles
 Ell0s = np.zeros(nparticles,dtype=float)
 Seeds = np.zeros(nparticles,dtype=np.int64)
-for i in tqdm.trange(nparticles):
+for i in range(nparticles):
     #try:
     #    seeds_of_this_simulation = np.load(dir_name+'/Seeds_With_Ell_Higher_'+str(ellmin)+'_Smaller_'+str(ellmax)+'_'+str(sim_num)+'.npy')
     #except FileNotFoundError:
@@ -43,7 +43,7 @@ for i in tqdm.trange(nparticles):
 
     #seed,ell0 = Get_High_L_Matrix(seed)#ellmin=ellmin,ellmax=ellmax)
 
-    Mc,rho0,eps1,eps2,seed = RPF.RandomParticle(seed=seed)
+    Mc,rho0,eps1,eps2,seed = RPF.RandomParticle(seed=seed)#,distribution='exp')
     Ell0s[i] = MeasureL(Mc,rho0,shape='strips')
     Seeds[i] = seed
     #seeds_of_this_simulation = np.append(seeds_of_this_simulation,seed)

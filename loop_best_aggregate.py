@@ -3,7 +3,7 @@
 # -> compute the line of prefered aggregate
 # -> output the line with the other informations
 import numpy as np
-import tqdm
+#import tqdm
 from Get_Best_Aggregate import *
 from Get_High_L_Matrix import *
 import sys
@@ -37,7 +37,7 @@ for n,s in enumerate(Seeds):
     Ell0s[n] = MeasureLFromSeed(s)
 #Seeds = SeedBag[SimNum*Nline:(SimNum+1)*Nline]
 
-for n in tqdm.trange(Seeds.shape[0]):
+for n in range(Seeds.shape[0]):
     # Generate a matrix with ell0 high enough : ell0>ellmin
     #Seeds[n],Ell0s[n] = Get_High_L_Matrix(Forbiden_seeds=Forbiden_seeds,ellmin=3.5)
     #Forbiden_seeds.add(Seeds[n])
