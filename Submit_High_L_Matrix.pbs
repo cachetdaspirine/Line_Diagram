@@ -1,8 +1,8 @@
 #!/bin/bash
-#PBS -V
-#PBS -q q-1jour
-#PBS -M h.leroy@epfl.ch
-#PBS -m ae
+##PBS -V
+##PBS -q q-1jour
+##PBS -M h.leroy@epfl.ch
+##PBS -m ae
 
 #SBATCH --chdir /home/hcleroy/Line_Diagram
 #SBATCH --nodes 1
