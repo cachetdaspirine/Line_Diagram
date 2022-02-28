@@ -9,14 +9,22 @@ sim_num = int(sys.argv[1])
 sim_max = int(sys.argv[2])
 # name of the directory
 dir_name = sys.argv[3]
+seed = int(sys.argv[4])
 
 nparticles = 100
 #ellmin = 0
 #ellmax = 3
 
-last_seed = np.load('last_max_seed.npy')
-np.save('last_max_seed.npy',last_seed * nparticles)
-seed = last_seed * nparticles
+#last_seed = np.load('last_max_seed.npy')[0]
+#np.save('last_max_seed.npy',[last_seed * nparticles])
+#file = open('last_max_seed.txt','r')
+#last_seed = int(file.read())
+#file.close()
+#file = open('last_max_seed.txt','w')
+#file.write(str(last_seed+nparticles))
+#file.close()
+#np.savetxt('last_max_seed.txt',last_seed+nparticles)
+#seed = last_seed + nparticles
 Ell0s = np.zeros(nparticles,dtype=float)
 Seeds = np.zeros(nparticles,dtype=np.int64)
 for i in tqdm.trange(nparticles):
