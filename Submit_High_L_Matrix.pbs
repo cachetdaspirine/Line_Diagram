@@ -9,7 +9,7 @@
 #SBATCH --ntasks 1
 #SBATCH --cpus-per-task 1
 #SBATCH --mem 4096
-#SBATCH --time 12:30:00
+#SBATCH --time 24:00:00
 
 #On se place dans le repertoire de travail
 #cd /home/hleroy/Simulation/Line_Diagram/
@@ -18,5 +18,5 @@
 #cd $PBS_O_WORKDIR
 
 #on lance le calcul
-python3 Loop_For_High_L.py $1 $2 $3 $4
+python3 Loop_For_High_L.py $1 $2 $3 $4 $5
 #python3 Loop.py $1
