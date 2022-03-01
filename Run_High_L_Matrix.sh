@@ -1,7 +1,13 @@
 #!/bin/bash
 SimMax=10
 SEEDFILE=last_max_seed.txt
+<<<<<<< HEAD
 Nparticles=100
+=======
+Nparticles=100000
+#start by loading python :
+module load gcc/8.4.0 python/3.7.7
+>>>>>>> 2dc1f3b4a07cc1462883ad1e9949423b19619b6b
 # create a directory with a new number
 i=0
 # while the directory (-d) exist, use a higher number
@@ -23,7 +29,12 @@ do
 	SEED=$(< $SEEDFILE)
 	SEED=$(($SEED + $Nparticles))
 	echo $SEED > $SEEDFILE
+<<<<<<< HEAD
 	#sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName $SEED
 	python3 Loop_For_High_L.py $SimNum $SimMax $FileName $SEED &
+=======
+	sbatch Submit_High_L_Matrix.pbs $SimNum $SimMax $FileName $SEED $Nparticles
+	#python3 Loop_For_High_L.py $SimNum $SimMax $FileName $SEED &
+>>>>>>> 2dc1f3b4a07cc1462883ad1e9949423b19619b6b
 	echo $SimNum
 done
