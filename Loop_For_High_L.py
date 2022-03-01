@@ -11,11 +11,7 @@ sim_max = int(sys.argv[2])
 dir_name = sys.argv[3]
 seed = int(sys.argv[4])
 
-<<<<<<< HEAD
-nparticles = 100
-=======
 nparticles = int(sys.argv[5])
->>>>>>> 2dc1f3b4a07cc1462883ad1e9949423b19619b6b
 #ellmin = 0
 #ellmax = 3
 
