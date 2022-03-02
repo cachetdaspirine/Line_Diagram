@@ -1,5 +1,5 @@
 #!/bin/bash
-SimMax=10
+SimMax=100
 SEEDFILE=last_max_seed.txt
 Nparticles=100000
 #start by loading python :
