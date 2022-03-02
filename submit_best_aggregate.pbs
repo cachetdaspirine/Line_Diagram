@@ -1,15 +1,22 @@
 #!/bin/bash
-#PBS -V
-#PBS -q q-1jour
-#PBS -M h.leroy@epfl.ch
-#PBS -m ae
+##PBS -V
+##PBS -q q-1jour
+##PBS -M h.leroy@epfl.ch
+##PBS -m ae
+
+#SBATCH --chdir /home/hcleroy/Line_Diagram
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH --cpus-per-task 1
+#SBATCH --mem 4096
+#SBATCH --time 24:00:00
 
 #On se place dans le repertoire de travail
-cd /home/hleroy/Simulation/Line_Diagram/
+#cd /home/hleroy/Simulation/Line_Diagram/
 #cd /home/hcleroy/Self_Fiber/Numerical_Computation/RandomParticle/Cluster/Line_Diagram
 
 #cd $PBS_O_WORKDIR
 
 #on lance le calcul
-python3 loop_best_aggregate.py $1 $2
+python3 loop_best_aggregate.py $1 $2 $3 $4 $5
 #python3 Loop.py $1

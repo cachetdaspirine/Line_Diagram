@@ -19,29 +19,28 @@ from Numeric_Hex_Energy import *
 #Number of points in the line
 NpointsGamma=100
 #fibers max width
-Wmax = 10
+Wmax = 30
 # hexagon max size
 Nmax = 1000
 SimNum = int(sys.argv[1])
-Folder = sys.argv[2]+'/'
+SimMax = int(sys.argv[2])
+Folder = sys.argv[3]+'/'
+File = sys.argv[4]
+NparticlesTotal = int(sys.argv[5])
+Nline = NparticlesTotal//SimMax
 
-
-#SeedBag = np.load('SeedBag400.npy')
-#Seeds = np.load(Folder+'Seeds_With_Ell_Higher_5_'+str(SimNum)+'.npy')
-Seeds = np.load(Folder+'Seeds_With_Ell_Higher_3_Smaller_5_'+str(SimNum)+'.npy')
-Ell0s = np.zeros(Seeds.shape[0],dtype=float)
-Lines = np.zeros(Seeds.shape[0],dtype=np.ndarray)
+Seeds = np.load(Folder+File+'seed.npy')[SimNum*Nline:(SimNum+1)*Nline]
+Nus = np.load(Folder+File+'NU.npy')[SimNum*Nline:(SimNum+1)*Nline]
+ells=np.load(Folder+File+'ell.npy')[SimNum*Nline:(SimNum+1)*Nline]
 # we also stor GammaMaxs
 GammaMaxS = np.zeros(Seeds.shape[0],dtype=float)
-for n,s in enumerate(Seeds):
-    Ell0s[n] = MeasureLFromSeed(s)
-#Seeds = SeedBag[SimNum*Nline:(SimNum+1)*Nline]
+
 
 for n in range(Seeds.shape[0]):
     # Generate a matrix with ell0 high enough : ell0>ellmin
     #Seeds[n],Ell0s[n] = Get_High_L_Matrix(Forbiden_seeds=Forbiden_seeds,ellmin=3.5)
     #Forbiden_seeds.add(Seeds[n])
-    Mc,rho0,eps1,eps2,seed = RPF.RandomParticle(Seeds[n])
+    #Mc,rho0,eps1,eps2,seed = RPF.RandomParticle(Seeds[n])
     #Ell0s[n] = MeasureL(Mc,rho0)
 
 
@@ -52,55 +51,57 @@ for n in range(Seeds.shape[0]):
 
 
 
-import Shape as Sh
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-from matplotlib import cm
-cmaplist = [(86./255,42./255.,132./255.,1.), (156./255,18/255.,109/255.,1.),(204./255.,35./255.,129./255.),(0,0,0,1)]
-cmap = mcolors.LinearSegmentedColormap.from_list(
-    'Custom cmap', cmaplist, 3)
-def truncate(number, digits) -> float:
-    stepper = 10.0 ** digits
-    return math.trunc(stepper * number) / stepper
-
-
-WidthMax=Wmax
-Nmax = Nmax
+# import Shape as Sh
+# import matplotlib.pyplot as plt
+# import matplotlib.colors as mcolors
+# from matplotlib import cm
+# cmaplist = [(86./255,42./255.,132./255.,1.), (156./255,18/255.,109/255.,1.),(204./255.,35./255.,129./255.),(0,0,0,1)]
+# cmap = mcolors.LinearSegmentedColormap.from_list(
+#     'Custom cmap', cmaplist, 3)
+# def truncate(number, digits) -> float:
+#     stepper = 10.0 ** digits
+#     return math.trunc(stepper * number) / stepper
+#
+#
+# WidthMax=Wmax
+# Nmax = Nmax
 
 #Intricated way to compute size max
 Size = int(1./6.* (3+np.sqrt(3*(4*Nmax-1))))
 NList = np.array([Sh.Np(Sh.Parallel(r,'Hexagon')) for r in np.arange(1,Size+1,1)])
 SizeMax=NList[-1]
 
-np.save(Folder+'Line'+str(SimNum),Lines,allow_pickle=True)
-np.save(Folder+'Gamma'+str(SimNum),GammaMaxS,allow_pickle=True)
-np.save(Folder+'Seed'+str(SimNum),Seeds,allow_pickle=True)
-np.save(Folder+'Ell0'+str(SimNum),Ell0s,allow_pickle=True)
+print(SizeMax)
 
-GammaRange = np.linspace(0,1.,NpointsGamma)
-fig,ax = plt.subplots(ncols=1,nrows=Nline,figsize=(15, Lines.shape[0]))
-for n in range(Nline):
-    #Define the masked array corresponding to the three regions
-    HexRegion = np.ma.masked_array([Lines[n][:,1],Lines[n][:,1]],(np.array([Lines[n][:,1],Lines[n][:,1]])==0)| (np.array([Lines[n][:,1],Lines[n][:,1]])==SizeMax))
-    FiberRegion = np.ma.masked_array([Lines[n][:,0],Lines[n][:,0]],np.array([Lines[n][:,0],Lines[n][:,0]])<=1)
-    LacnarBulkRegion = np.ma.masked_array([Lines[n][:,2],Lines[n][:,2]],np.array([Lines[n][:,2],Lines[n][:,2]])==0)
-    BulkRegion = np.ma.masked_array([Lines[n][:,1],Lines[n][:,1]],np.array([Lines[n][:,1],Lines[n][:,1]])!=SizeMax)
+np.save(Folder+'Line'+str(SimNum)+'.npy',Lines,allow_pickle=True)
+np.save(Folder+'Gamma'+str(SimNum)+'.npy',GammaMaxS,allow_pickle=True)
+np.save(Folder+'Seed'+str(SimNum)+'.npy',Seeds,allow_pickle=True)
+np.save(Folder+'Ell0'+str(SimNum)+'.npy',Ell0s,allow_pickle=True)
 
-    # Nu defines the Y axis of each line
-    NU = [-1,1]
+# GammaRange = np.linspace(0,1.,NpointsGamma)
+# fig,ax = plt.subplots(ncols=1,nrows=Nline,figsize=(15, Lines.shape[0]))
+# for n in range(Nline):
+#     #Define the masked array corresponding to the three regions
+#     HexRegion = np.ma.masked_array([Lines[n][:,1],Lines[n][:,1]],(np.array([Lines[n][:,1],Lines[n][:,1]])==0)| (np.array([Lines[n][:,1],Lines[n][:,1]])==SizeMax))
+#     FiberRegion = np.ma.masked_array([Lines[n][:,0],Lines[n][:,0]],np.array([Lines[n][:,0],Lines[n][:,0]])<=1)
+#     LacnarBulkRegion = np.ma.masked_array([Lines[n][:,2],Lines[n][:,2]],np.array([Lines[n][:,2],Lines[n][:,2]])==0)
+#     BulkRegion = np.ma.masked_array([Lines[n][:,1],Lines[n][:,1]],np.array([Lines[n][:,1],Lines[n][:,1]])!=SizeMax)
+#
+#     # Nu defines the Y axis of each line
+#     NU = [-1,1]
 
     #Plot the different colors
-    ax[Nline-n-1].pcolormesh([GammaRange,GammaRange],NU,HexRegion,cmap=cm.Reds,vmin=1,vmax=SizeMax,shading='auto')#,norm=mcolors.LogNorm()
-    #ax[Nline-n-1].pcolormesh([GammaRange,GammaRange],NU,BulkRegion,cmap=cmap,shading='auto')
-    ax[Nline-n-1].pcolormesh([GammaRange,GammaRange],NU,LacnarBulkRegion,cmap=cmap,shading='auto')
-    ax[Nline-n-1].pcolormesh([GammaRange,GammaRange],NU,FiberRegion,cmap=cm.Blues,shading='auto')
-    #ax[Nmax-n-1].set_yticklabels([truncate(Parameter[n,0],3)])
-    #ax[Nmax-n-1].set_yticklabels([truncate(Pline[n],3)])
-    if n!=0:
-        ax[Nline-n-1].tick_params(axis='x',which='both',bottom=False,top=False,labelbottom=False)
-    #ax[Lines.shape[0]-n-1].pcolormesh([GammaRange,GammaRange],NU,Fiber2Region,cmap=cm.Greens,vmin=1,vmax=WidthMax)
-ax[-1].set_xlabel(r'$\frac{\Gamma}{\Gamma_{max}}$',fontsize=30)
-ax[ax.__len__()//2].set_ylabel(r'$\nu$',fontsize=30)
-fig.savefig('RandomPhaseDiagram'+str(SimNum)+'.pdf',transparent=True,bbox_inches='tight')
+#     ax[Nline-n-1].pcolormesh([GammaRange,GammaRange],NU,HexRegion,cmap=cm.Reds,vmin=1,vmax=SizeMax,shading='auto')#,norm=mcolors.LogNorm()
+#     #ax[Nline-n-1].pcolormesh([GammaRange,GammaRange],NU,BulkRegion,cmap=cmap,shading='auto')
+#     ax[Nline-n-1].pcolormesh([GammaRange,GammaRange],NU,LacnarBulkRegion,cmap=cmap,shading='auto')
+#     ax[Nline-n-1].pcolormesh([GammaRange,GammaRange],NU,FiberRegion,cmap=cm.Blues,shading='auto')
+#     #ax[Nmax-n-1].set_yticklabels([truncate(Parameter[n,0],3)])
+#     #ax[Nmax-n-1].set_yticklabels([truncate(Pline[n],3)])
+#     if n!=0:
+#         ax[Nline-n-1].tick_params(axis='x',which='both',bottom=False,top=False,labelbottom=False)
+#     #ax[Lines.shape[0]-n-1].pcolormesh([GammaRange,GammaRange],NU,Fiber2Region,cmap=cm.Greens,vmin=1,vmax=WidthMax)
+# ax[-1].set_xlabel(r'$\frac{\Gamma}{\Gamma_{max}}$',fontsize=30)
+# ax[ax.__len__()//2].set_ylabel(r'$\nu$',fontsize=30)
+# fig.savefig('RandomPhaseDiagram'+str(SimNum)+'.pdf',transparent=True,bbox_inches='tight')
 #fig.savefig('RandomPhaseDiagram_3.png',transparent=True,bbox_inches='tight')
 #plt.imshow([Lines[:,2][0],np.arange(0.,1.5,0.02)])
