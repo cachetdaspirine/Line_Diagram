@@ -6,7 +6,7 @@ module load gcc/8.4.0 python/3.7.7
 
 #dir_name=ellmin5_Wmax10_Nmax100_dGamma100_second_batch
 dir_name=centralized_data
-file_name=top_1E6_ell0_
+file_name=top_ell_homogeneous_nu_
 
 for SimNum in $(seq 0 $SimMax)
 do

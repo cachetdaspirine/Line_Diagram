@@ -29,9 +29,9 @@ File = sys.argv[4]
 NparticlesTotal = int(sys.argv[5])
 Nline = NparticlesTotal//SimMax
 
-Seeds = np.load(Folder+File+'seed.npy')[SimNum*Nline:(SimNum+1)*Nline]
+Seeds = np.load(Folder+File+'SEED.npy')[SimNum*Nline:(SimNum+1)*Nline]
 Nus = np.load(Folder+File+'NU.npy')[SimNum*Nline:(SimNum+1)*Nline]
-ells=np.load(Folder+File+'ell.npy')[SimNum*Nline:(SimNum+1)*Nline]
+ells=np.load(Folder+File+'ELL.npy')[SimNum*Nline:(SimNum+1)*Nline]
 # we also stor GammaMaxs
 GammaMaxS = np.zeros(Seeds.shape[0],dtype=float)
 
