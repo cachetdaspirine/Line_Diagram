@@ -2,7 +2,7 @@
 SimMax=100
 NparticlesTotal=100000
 
-module load gcc/8.4.0 python/3.7.7
+#module load gcc/8.4.0 python/3.7.7
 
 #dir_name=ellmin5_Wmax10_Nmax100_dGamma100_second_batch
 dir_name=centralized_data
