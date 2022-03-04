@@ -34,6 +34,7 @@ Nus = np.load(Folder+File+'NU.npy')[SimNum*Nline:(SimNum+1)*Nline]
 ells=np.load(Folder+File+'ELL.npy')[SimNum*Nline:(SimNum+1)*Nline]
 # we also stor GammaMaxs
 GammaMaxS = np.zeros(Seeds.shape[0],dtype=float)
+Lines = np.zeros(Seeds.shape[0],dtype=np.ndarray)
 
 
 for n in range(Seeds.shape[0]):
