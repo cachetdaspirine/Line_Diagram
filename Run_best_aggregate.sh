@@ -1,6 +1,6 @@
 #!/bin/bash
 SimMax=100
-NparticlesTotal=100000
+NparticlesTotal=2900
 
 #module load gcc/8.4.0 python/3.7.7
 
@@ -14,8 +14,8 @@ do
 	#python3 loop_best_aggregate.py $SimNum $dir_name $file_name &
 	#bash submit_best_aggregate.pbs $SimNum $dir_name
 done;
-wait
+#wait
 
 date
 
-python3 merge_data.py $SimMax $dir_name
+#python3 merge_data.py $SimMax $dir_name
