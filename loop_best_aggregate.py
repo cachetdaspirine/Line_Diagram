@@ -23,7 +23,7 @@ Wmax = 30
 # hexagon max size
 Nmax = 1000
 SimNum = int(sys.argv[1])
-SimMax = int(sys.argv[2])
+SimMax = int(sys.argv[2])+1
 Folder = sys.argv[3]+'/'
 File = sys.argv[4]
 NparticlesTotal = int(sys.argv[5])

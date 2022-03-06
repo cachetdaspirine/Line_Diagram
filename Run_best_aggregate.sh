@@ -1,5 +1,5 @@
 #!/bin/bash
-SimMax=100
+SimMax=99
 NparticlesTotal=2900
 
 #module load gcc/8.4.0 python/3.7.7
