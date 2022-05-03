@@ -1,9 +1,12 @@
 __pycache__/
 ell*/
-.ipynb_checkpoints/.ipynb
+.ipynb_checkpoints/
 *.ipynb
 *.pdf
 *.data
 *.npy
 *.out
+*.svg
+3x3_figure/
 Res*/
+result_by_simulating_strips

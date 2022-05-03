@@ -17,13 +17,14 @@ from Numeric_Hex_Energy import *
 
 #parameter of get line diagram also usefull for the plot part
 #Number of points in the line
+OUTPUT = 'ALL'
 NpointsGamma=100
 #fibers max width
 Wmax = 30
 # hexagon max size
 Nmax = 1000
 SimNum = int(sys.argv[1])
-SimMax = int(sys.argv[2])+1
+SimMax = int(sys.argv[2])
 Folder = sys.argv[3]+'/'
 File = sys.argv[4]
 NparticlesTotal = int(sys.argv[5])
@@ -37,6 +38,8 @@ Ell0s=np.load(Folder+File+'ELL.npy')[SimNum*Nline:(SimNum+1)*Nline]
 # we also stor GammaMaxs
 GammaMaxS = np.zeros(Seeds.shape[0],dtype=float)
 Lines = np.zeros(Seeds.shape[0],dtype=np.ndarray)
+if OUTPUT=='all':
+    Energy = Lines = np.zeros(Seeds.shape[0],dtype=np.ndarray)
 
 
 for n in range(Seeds.shape[0]):
@@ -50,7 +53,10 @@ for n in range(Seeds.shape[0]):
     # Make the corresponding matrix
     Mc,rho0,e1,e2,Seeds[n] = RPF.RandomParticle(seed = Seeds[n])
     # generate the line, which has the size NpointsGamma
-    Lines[n], GammaMaxS[n] = Make_Line_Diagram(Mc,rho0,e1,e2,NpointsGamma=NpointsGamma,Nmax=Nmax,Wmax=Wmax)
+    if OUTPUT == 'all':
+        Lines[n], GammaMaxS[n], Energy[n] = Make_Line_Diagram_ouput_all(Mc,rho0,e1,e2,NpointsGamma=NpointsGamma,Nmax=Nmax,Wmax=Wmax)
+    else:
+        Lines[n], GammaMaxS[n] = Make_Line_Diagram(Mc,rho0,e1,e2,NpointsGamma=NpointsGamma,Nmax=Nmax,Wmax=Wmax)
 
 
 
@@ -76,6 +82,8 @@ SizeMax=NList[-1]
 
 print(SizeMax)
 
+if OUTPUT=='all':
+    np.save(Folder+'Energy'+str(SimNum)+'.npy',Energy,allow_pickle=True)
 np.save(Folder+'Line'+str(SimNum)+'.npy',Lines,allow_pickle=True)
 np.save(Folder+'Gamma'+str(SimNum)+'.npy',GammaMaxS,allow_pickle=True)
 np.save(Folder+'Seed'+str(SimNum)+'.npy',Seeds,allow_pickle=True)
