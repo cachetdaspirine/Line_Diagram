@@ -3,6 +3,7 @@
 # -> compute the line of prefered aggregate
 # -> output the line with the other informations
 import numpy as np
+from numpy.random import default_rng
 #import tqdm
 from Get_Best_Aggregate import *
 from Get_High_L_Matrix import *
@@ -20,7 +21,7 @@ from Numeric_Hex_Energy import *
 OUTPUT = 'ALL'
 NpointsGamma=100
 #fibers max width
-Wmax = 30
+Wmax = 20
 # hexagon max size
 Nmax = 1000
 SimNum = int(sys.argv[1])
@@ -30,10 +31,26 @@ File = sys.argv[4]
 NparticlesTotal = int(sys.argv[5])
 Nline = NparticlesTotal//SimMax
 
-Seeds = np.load(Folder+File+'SEED.npy')[SimNum*Nline:(SimNum+1)*Nline]
-Nus = np.load(Folder+File+'NU.npy')[SimNum*Nline:(SimNum+1)*Nline]
-Ell0s=np.load(Folder+File+'ELL.npy')[SimNum*Nline:(SimNum+1)*Nline]
+Seeds = np.load(Folder+File+'SEED.npy')
+Nus = np.load(Folder+File+'NU.npy')
+Ell0s=np.load(Folder+File+'ELL.npy')
 
+if Seeds.shape[0]!=NparticlesTotal:
+    # if the number of particle asked time the number of Simulation
+    # is not equal to the total seed size, then we randomly draw
+    # the amount asked, homogeneously within the whole array.
+    rng = default_rng()
+    Nstep = Seeds.shape[0]//SimMax
+    indexs = rng.choice(Nstep,size=Nline,replace=False)
+    Seeds = Seeds[SimNum*Nstep:(SimNum+1)*Nstep][indexs]
+    Nus = Nus[SimNum*Nstep:(SimNum+1)*Nstep][indexs]
+    Ell0s=Ell0s[SimNum*Nstep:(SimNum+1)*Nstep][indexs]
+    #print(Nus,SimNum,sep=' ')
+    #sys.exit()
+else:
+    Seeds = Seeds[SimNum*Nline:(SimNum+1)*Nline]
+    Nus = Nus[SimNum*Nline:(SimNum+1)*Nline]
+    Ell0s=Ell0s[SimNum*Nline:(SimNum+1)*Nline]
 
 # we also stor GammaMaxs
 GammaMaxS = np.zeros(Seeds.shape[0],dtype=float)
