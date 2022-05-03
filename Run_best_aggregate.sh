@@ -11,8 +11,8 @@ file_name=top_ell_homogeneous_nu_
 
 for SimNum in $(seq 0 $SimMax)
 do
-	#sbatch -W submit_best_aggregate.pbs $SimNum $SimMax $dir_name $file_name $NparticlesTotal &
-	python3 loop_best_aggregate.py $SimNum $SimMax $dir_name $file_name $NparticlesTotal &
+	sbatch -W submit_best_aggregate.pbs $SimNum $SimMax $dir_name $file_name $NparticlesTotal &
+	#python3 loop_best_aggregate.py $SimNum $SimMax $dir_name $file_name $NparticlesTotal &
 done;
 #wait
 
