@@ -103,12 +103,6 @@ for i in range(1,100):
     Seeds_low = np.append(Seeds_low,np.load(Folder_low+'Seed'+str(i)+'.npy',allow_pickle=True))
 #for n,line in enumerate(Lines_low):
 #    Lines_low[n][np.where(line==919)] = 0
-print()
-print('Ell0s_low')
-print('Gammas_low')
-print('Lines_low')
-print('Seeds_low')
-print('NUs_low')
 def sort_arrays_according_to_first_one(*arg):
     res = list()
     for array in arg[:]:

@@ -55,7 +55,7 @@ else:
 # we also stor GammaMaxs
 GammaMaxS = np.zeros(Seeds.shape[0],dtype=float)
 Lines = np.zeros(Seeds.shape[0],dtype=np.ndarray)
-if OUTPUT=='all':
+if OUTPUT=='all' or OUTPUT == 'ALL':
     Energy = Lines = np.zeros(Seeds.shape[0],dtype=np.ndarray)
 
 
@@ -70,7 +70,7 @@ for n in range(Seeds.shape[0]):
     # Make the corresponding matrix
     Mc,rho0,e1,e2,Seeds[n] = RPF.RandomParticle(seed = Seeds[n])
     # generate the line, which has the size NpointsGamma
-    if OUTPUT == 'all':
+    if OUTPUT == 'all' or OUTPUT=='ALL':
         Lines[n], GammaMaxS[n], Energy[n] = Make_Line_Diagram_ouput_all(Mc,rho0,e1,e2,NpointsGamma=NpointsGamma,Nmax=Nmax,Wmax=Wmax)
     else:
         Lines[n], GammaMaxS[n] = Make_Line_Diagram(Mc,rho0,e1,e2,NpointsGamma=NpointsGamma,Nmax=Nmax,Wmax=Wmax)
