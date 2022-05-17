@@ -99,7 +99,7 @@ SizeMax=NList[-1]
 
 print(SizeMax)
 
-if OUTPUT=='all':
+if OUTPUT=='all' or OUTPUT=='ALL':
     np.save(Folder+'Energy'+str(SimNum)+'.npy',Energy,allow_pickle=True)
 np.save(Folder+'Line'+str(SimNum)+'.npy',Lines,allow_pickle=True)
 np.save(Folder+'Gamma'+str(SimNum)+'.npy',GammaMaxS,allow_pickle=True)
