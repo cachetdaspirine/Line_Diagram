@@ -21,9 +21,9 @@ from Numeric_Hex_Energy import *
 OUTPUT = 'ALL'
 NpointsGamma=100
 #fibers max width
-Wmax = 20
+Wmax = 50
 # hexagon max size
-Nmax = 1000
+Nmax = 5000
 SimNum = int(sys.argv[1])
 SimMax = int(sys.argv[2])
 Folder = sys.argv[3]+'/'
